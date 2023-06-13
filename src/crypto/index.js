@@ -2,7 +2,7 @@
  * @Author: 孔繁荣 1924106306@qq.com
  * @Date: 2023-05-19 17:04:55
  * @LastEditors: 孔繁荣 1924106306@qq.com
- * @LastEditTime: 2023-06-13 09:20:23
+ * @LastEditTime: 2023-06-13 10:59:50
  * @FilePath: /pcxt_dsr_web/src/utils/crypto.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -20,7 +20,6 @@ export class SobRSA {
     isDebugger =null
     isOpen =null
     constructor(config){
-        console.log(config)
         if(!config){
             throw Error('required init options!')
         }
@@ -36,7 +35,6 @@ export class SobRSA {
  * @return {*} 不加密返回0，加密返回1 兼容小程序
  */
     filterWhiteList(path) {
-        console.log(this)
         const serviceApi = this.whiteList
         if (
             !this.isOpen ||
