@@ -1,5 +1,5 @@
 {
-  "name": "sobrsa",
+  "name": "sobRSA",
   "version": "1.0.0",
   "description": "针对项目进行RSA加密封装",
   "main": "/lib/index.js",
@@ -23,5 +23,5 @@
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-terser": "^0.4.3"
   },
-  "repository": "https://github.com/SoberK/sobRSA.git"
+  "repository": "https://github.com/SoberK/sobASR.git"
 }
