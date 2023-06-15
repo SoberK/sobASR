@@ -1,6 +1,6 @@
 {
   "name": "sobrsa",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "针对项目进行RSA加密封装",
   "main": "/lib/index.js",
   "scripts": {
