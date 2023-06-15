@@ -2,7 +2,7 @@
  * @Author: 孔繁荣 1924106306@qq.com
  * @Date: 2023-05-19 17:04:55
  * @LastEditors: 孔繁荣 1924106306@qq.com
- * @LastEditTime: 2023-06-13 10:59:50
+ * @LastEditTime: 2023-06-14 10:33:31
  * @FilePath: /pcxt_dsr_web/src/utils/crypto.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,16 +10,19 @@
 /* 产引入jsencrypt实现数据RSA加密 */
 // import JSEncrypt from 'jsencrypt' // 处理长文本数据时报错 jsencrypt.js Message too long for RSA
 /* 产引入encryptlong实现数据RSA加密 */
+
+
 import Encrypt from './jsencrypt.js' // encryptlong是基于jsencrypt扩展的长文本分段加解密功能。
 
+import {SobRsaConfig,SobRsaClass} from  './index.d'
 
-export class SobRSA {
-    whiteList=null
-    publicKey =null
-    privateKey =null
-    isDebugger =null
-    isOpen =null
-    constructor(config){
+export class SobRSA implements SobRsaClass {
+    whiteList:Array<any>
+    publicKey:String
+    privateKey:String
+    isDebugger:Boolean
+    isOpen:Boolean
+    constructor(config:SobRsaConfig){
         if(!config){
             throw Error('required init options!')
         }
@@ -34,11 +37,11 @@ export class SobRSA {
  * @param {*} path 白名单地址
  * @return {*} 不加密返回0，加密返回1 兼容小程序
  */
-    filterWhiteList(path) {
+    filterWhiteList(path:String) {
         const serviceApi = this.whiteList
         if (
             !this.isOpen ||
-            (serviceApi && serviceApi.findIndex(e => path.includes(e)) !== -1)
+            (serviceApi && serviceApi.findIndex((e:any) => path.includes(e)) !== -1)
         ) {
             return 0
         }
@@ -51,7 +54,7 @@ export class SobRSA {
      * @param {*} publicKey 密钥，默认程序配置的RSA公钥
      * @return {*}
      */
-    encode(data, publicKey = this.publicKey) {
+    encode(data:any, publicKey:String = this.publicKey):String {
         var encryptor = new Encrypt()
         encryptor.setPublicKey(publicKey)
         return encryptor.encryptLong(data)
@@ -62,7 +65,7 @@ export class SobRSA {
      * @param {*} privateKey 密钥，默认程序配置的RSA私钥
      * @return {*}
      */
-    decode(data, privateKey = this.privateKey) {
+    decode(data:any, privateKey:String = this.privateKey) {
         var encryptor = new Encrypt()
         encryptor.setPrivateKey(privateKey)
         return encryptor.decryptLong(data)
@@ -73,7 +76,7 @@ export class SobRSA {
      * @param {*} path 请求地址
      * @return {*}
      */
-    encrypt  (params, path)  {
+    encrypt  (params:any, path:String)  {
         if (JSON.stringify(params) === '{}') return {}
         const isPass = this.filterWhiteList(path)
         if (!isPass) {
@@ -100,7 +103,7 @@ export class SobRSA {
      * @param {*} path 请求地址
      * @return {*}
      */
-    decrypt  (params, path)  {
+    decrypt  (params:any, path:String)  {
         if (JSON.stringify(params) === '{}') return {}
         const isPass = this.filterWhiteList(path)
         if (!isPass) {
