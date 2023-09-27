@@ -6,6 +6,7 @@ export declare class SobRSA implements SobRsaClass {
     isDebugger: Boolean;
     isOpen: Boolean;
     constructor(config: SobRsaConfig);
+    test(): void;
     /**
  * @description: 过滤白名单
  * @param {*} path 白名单地址

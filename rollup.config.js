@@ -10,7 +10,8 @@
 import { defineConfig } from "rollup";
 import terser from '@rollup/plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
+import {nodeResolve} from '@rollup/plugin-node-resolve';
+console.log(process.cwd());
 // import babel from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 export default defineConfig({
@@ -23,5 +24,5 @@ export default defineConfig({
         },
     ],
     // babel({ babelHelpers: 'bundled' }),
-    plugins: [resolve(), typescript(), commonjs(),  terser()],
+    plugins: [nodeResolve({ preferBuiltins: true}), typescript(), commonjs(),  terser()],
 });

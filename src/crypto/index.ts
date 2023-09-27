@@ -13,9 +13,7 @@
 
 
 import Encrypt from './jsencrypt.js' // encryptlong是基于jsencrypt扩展的长文本分段加解密功能。
-
 import {SobRsaConfig,SobRsaClass} from  './index.d'
-
 export class SobRSA implements SobRsaClass {
     whiteList:Array<any>
     publicKey:String
@@ -31,6 +29,15 @@ export class SobRSA implements SobRsaClass {
         this.publicKey = config.publicKey
         this.privateKey = config.privateKey
         this.isDebugger = config.isDebugger
+        this.test()
+    }
+    test(){
+        // console.log(fg);
+        console.log(process.cwd());
+        // console.log(__dirname);
+        // console.log(path.resolve(process.cwd(),'sobRsa.config.js'));
+        // const [files] = fg.sync('sobRsa.config.js',{cwd:process.cwd(),absolute:true});
+        // console.log(files);
     }
     /**
  * @description: 过滤白名单
@@ -77,6 +84,10 @@ export class SobRSA implements SobRsaClass {
      * @return {*}
      */
     encrypt  (params:any, path:String)  {
+        console.log(1111111111111);
+        console.log(Object.prototype.toString.call(params))
+        console.log(Object.prototype.toString.call(params) === '[object FormData]')
+        if(Object.prototype.toString.call(params) === '[object FormData]')return params;
         if (JSON.stringify(params) === '{}') return {}
         const isPass = this.filterWhiteList(path)
         if (!isPass) {
